@@ -1,0 +1,16 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com"  #enter the url
+
+response = requests.get(url)  #this send out the request
+
+if response.status_code == 200:  #if 200 is returned then status is ok
+    soup = BeautifulSoup(response.content, "html.parser") #Parsing
+    
+    titles = soup.find_all("h2")  #FINDING ARTICLE TAGS 
+
+    for title in titles:
+        print(title.get_text())  #printing each title
+else:
+    print("Failed to retrieve the webpage. Status code:", response.status_code)
